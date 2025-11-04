@@ -30,7 +30,14 @@ export default function AllPerks() {
 
 */
 
-  
+  useEffect(() => {
+   loadAllPerks();  
+  }, []);
+
+  useEffect(() => {
+    loadAllPerks();
+  }, [searchQuery, merchantFilter]);
+
   useEffect(() => {
     // Extract all merchant names from perks array
     const merchants = perks
@@ -136,7 +143,8 @@ export default function AllPerks() {
                 type="text"
                 className="input"
                 placeholder="Enter perk name..."
-                
+                onChange={e => setSearchQuery(e.target.value)}
+                value={searchQuery}
               />
               <p className="text-xs text-zinc-500 mt-1">
                 Auto-searches as you type, or press Enter / click Search
@@ -151,7 +159,8 @@ export default function AllPerks() {
               </label>
               <select
                 className="input"
-                
+                onChange={e => {setMerchantFilter(e.target.value)}}
+                value={merchantFilter}
               >
                 <option value="">All Merchants</option>
                 
